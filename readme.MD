@@ -23,7 +23,7 @@
 - wpisać komendę php artisan migrate
 
 ## Testowy Serwer:
-[https://portfolio.sk99.pl/ultimate_systems]()
+[https://portfolio.sk99.pl/]()
 
 ## Prace nad projektem step by step:
   - Edycja pliku `app.php`:
