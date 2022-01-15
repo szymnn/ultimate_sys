@@ -1,5 +1,73 @@
 <?php
-
+/**
+ * @OA\Post(
+ * path="/api/login",
+ * summary="Logowanie",
+ * description="Logowanie odbywa się za pomocą: email, password",
+ * operationId="login",
+ * tags={"Login/Register"},
+ * @OA\RequestBody(
+ *    required=true,
+ *    description="Pass user credentials",
+ *    @OA\JsonContent(
+ *       required={"email","password"},
+ *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+ *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+ *    ),
+ * ),
+ * @OA\Response(response=200, description="Zwrotka Logowania Wygenerowany token należy wkleić do Authorize")
+ * )
+ *  @OA\Post(
+ * path="/api/register",
+ * summary="Rejestracja",
+ * description="Logowanie odbywa się za pomocą: email, password",
+ * operationId="store",
+ * tags={"Login/Register"},
+ * @OA\RequestBody(
+ *    required=true,
+ *    description="Pass user credentials",
+ *    @OA\JsonContent(
+ *       required={"name","email","password"},
+ *      @OA\Property(property="name", type="string", format="string", example="user1"),
+ *       @OA\Property(property="email", type="string", format="email", example="user1@mail.com"),
+ *       @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+ *    ),
+ * ),
+ * @OA\Response(response=200, description="Zwrotka rejestracji")
+ * )
+ * @OA\SecurityScheme(
+ *     type="http",
+ *     description="Login with email and password to get the authentication token",
+ *     name="Token based Based",
+ *     in="header",
+ *     scheme="bearer",
+ *     bearerFormat="JWT",
+ *     securityScheme="apiAuth",
+ * )
+ * )
+ * @OA\Get(
+ *  path="/api/logout",
+ *  summary="Wyloguj się",
+ *  tags={"AFTER LOGGED IN"},
+ *  @OA\Response(response=200, description="Zwrotka wylogowania"),
+ *  security={{ "apiAuth": {} }}
+ * )
+ * @OA\Get(
+ *  path="/api/user_info",
+ *  summary="Pobierz dane użytkownika",
+ *  tags={"AFTER LOGGED IN"},
+ *  @OA\Response(response=200, description="Zwrotka nowego tokenu"),
+ *  security={{ "apiAuth": {} }}
+ * )
+ * @OA\Get(
+ *  path="/api/refresh",
+ *  summary="Odświerz token - Po odświerzeniu wprowadź go do aplikacji ponownie",
+ *  tags={"AFTER LOGGED IN"},
+ *  @OA\Response(response=200, description="Zwrotka nowego tokenu, należy ją wprowadzić do authorize ponownie"),
+ *  security={{ "apiAuth": {} }}
+ * )
+ *
+ */
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateUserRequest;
